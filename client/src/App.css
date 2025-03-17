@@ -1,0 +1,185 @@
+/* Importing the Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Apply the font to the entire body */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f7fafc; /* Light background color for better contrast */
+  color: #333; /* Dark text for readability */
+}
+
+
+/* Container */
+.todo-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field */
+.todo-input {
+  width: 94%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.todo-input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 5px rgba(96, 165, 250, 0.5);
+}
+
+/* Add task button */
+.add-task-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.add-task-btn:hover {
+  background-color: #2563eb;
+}
+
+.add-task-btn:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
+/* Message when there are no tasks */
+.no-tasks-message {
+  text-align: center;
+  color: #6b7280;
+  font-size: 18px;
+  margin-top: 16px;
+}
+
+/* Todo Item */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Edit input */
+.edit-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.edit-input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 5px rgba(96, 165, 250, 0.5);
+}
+
+/* Save/Cancel buttons container */
+.saveBtnContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn,
+.cancel-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.save-btn {
+  background-color: #22c55e;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #9ca3af;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #16a34a;
+}
+
+.cancel-btn:hover {
+  background-color: #6b7280;
+}
+
+/* Todo Text */
+.todo-text {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.todo-text:hover {
+  text-decoration: underline;
+}
+
+/* Completed Task Style */
+.completed-task {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.check-icon {
+  color: #10b981;
+  margin-right: 8px;
+}
+
+/* Todo actions (Edit/Delete buttons) */
+.todo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.edit-btn {
+  color: #3b82f6;
+}
+
+.delete-btn {
+  color: #ef4444;
+}
+
+.edit-btn:hover {
+  color: #2563eb;
+}
+
+.delete-btn:hover {
+  color: #dc2626;
+}
