@@ -40,8 +40,12 @@ const userSchema = new mongoose.Schema(
       },
     },
 
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
     refreshToken: {
-        type: String,  // Store the refresh token
+        type: String,  
         default: null,
       },
   },

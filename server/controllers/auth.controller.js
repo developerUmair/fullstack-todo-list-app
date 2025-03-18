@@ -9,12 +9,12 @@ import {
   JWT_REFRESH_SECRET,
 } from "../config/env.js";
 
-export const signUp = async (req, res) => {
+export const signUp = async (req, res, next) => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, isAdmin = false } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({ email }).session(session);
@@ -30,14 +30,18 @@ export const signUp = async (req, res) => {
 
     // Create new user inside transaction
     const newUser = await User.create(
-      [{ name, email, password: hashedPassword }],
+      [{ name, email, password: hashedPassword, isAdmin }],
       { session }
     );
 
     // Generate Access Token (short-lived)
-    const accessToken = jwt.sign({ userId: newUser[0]._id }, JWT_SECRET, {
-      expiresIn: JWT_EXPIRES_IN,
-    });
+    const accessToken = jwt.sign(
+      { userId: newUser[0]._id, isAdmin: newUser[0].isAdmin },
+      JWT_SECRET,
+      {
+        expiresIn: JWT_EXPIRES_IN,
+      }
+    );
 
     // Generate Refresh Token (long-lived)
     const refreshToken = jwt.sign(
@@ -62,15 +66,11 @@ export const signUp = async (req, res) => {
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    console.error(error);
-    res.status(error.statusCode || 500).json({
-      success: false,
-      message: error.message || "Internal Server Error",
-    });
+    next(error);
   }
 };
 
-export const signIn = async (req, res) => {
+export const signIn = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -88,7 +88,7 @@ export const signIn = async (req, res) => {
       throw error;
     }
 
-    const accessToken = jwt.sign({ userId: user._id }, JWT_SECRET, {
+    const accessToken = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, JWT_SECRET, {
       expiresIn: JWT_EXPIRES_IN,
     });
 
@@ -104,10 +104,10 @@ export const signIn = async (req, res) => {
       data: {
         accessToken,
         refreshToken,
-        user
+        user,
       },
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
